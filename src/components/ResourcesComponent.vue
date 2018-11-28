@@ -9,9 +9,9 @@
                     <Button icon="ios-cloud-upload-outline">导入{{resourcetitle}}列表</Button>
                 </Upload>
             </Col> -->
-            <Col span="4" align="left">
+            <!-- <Col span="4" align="left">
                 <Button type="text" @click="downloadexcel()">下载excel模板</Button>
-            </Col>
+            </Col> -->
             <Col span="4" >
                 <Button  @click="exportData()"><Icon type="ios-download-outline"></Icon> 导出{{resourcetitle}}列表</Button>
             </Col>
