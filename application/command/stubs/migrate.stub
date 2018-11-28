@@ -1,0 +1,20 @@
+<?php
+
+use think\migration\Migrator;
+use think\migration\db\Column;
+
+class Create{%className%}Table extends Migrator
+{
+    public function change()
+    {
+        $table = $this->table('{%className%}');
+
+        // 字段
+        
+        $table->addTimestamps();
+        $table->addSoftDelete();
+
+        // 创建
+        $table->create();
+    }
+}

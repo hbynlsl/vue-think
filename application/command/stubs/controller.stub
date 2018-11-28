@@ -1,0 +1,65 @@
+<?php
+
+namespace {%namespace%};
+
+use think\Controller;
+use think\Request;
+use app\common\model\{%className%};
+
+class {%className%}Controller extends Controller
+{
+    /**
+     * 显示资源列表
+     *
+     * @return \think\Response
+     */
+    public function index{%actionSuffix%}()
+    {
+        return json({%className%}::all());
+    }
+
+    /**
+     * 保存新建的资源
+     *
+     * @param  \think\Request  $request
+     * @return \think\Response
+     */
+    public function save{%actionSuffix%}(Request $request)
+    {
+        // 
+    }
+
+    /**
+     * 显示指定的资源
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function read{%actionSuffix%}($id)
+    {
+        return json({%className%}::get($id));
+    }
+
+    /**
+     * 保存更新的资源
+     *
+     * @param  \think\Request  $request
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function update{%actionSuffix%}(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * 删除指定资源
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function delete{%actionSuffix%}($id)
+    {
+        //
+    }
+}
