@@ -9,8 +9,6 @@ class {%className%} extends Model
 {
     // 模型对应数据表的字段列表（数组）
     protected $field = [];
-    // 默认开启自动写入/修改时间戳
-    protected $autoWriteTimestamp = true;
     // 定义时间戳字段名
     protected $createTime = 'create_time';
     protected $updateTime = 'update_time';

@@ -26,7 +26,8 @@ class {%className%}Controller extends Controller
      */
     public function save{%actionSuffix%}(Request $request)
     {
-        // 
+         $record = {%className%}::create($request->post());
+         return json($record);
     }
 
     /**
@@ -41,6 +42,17 @@ class {%className%}Controller extends Controller
     }
 
     /**
+     * 显示修改指定资源
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function edit{%actionSuffix%}($id)
+    {
+        return json({%className%}::get($id));
+    }
+
+    /**
      * 保存更新的资源
      *
      * @param  \think\Request  $request
@@ -49,7 +61,7 @@ class {%className%}Controller extends Controller
      */
     public function update{%actionSuffix%}(Request $request, $id)
     {
-        //
+       return {%className%}::where('id', $id)->update($request->put());
     }
 
     /**
@@ -60,6 +72,9 @@ class {%className%}Controller extends Controller
      */
     public function delete{%actionSuffix%}($id)
     {
-        //
+        if ({%className%}::destroy($id)) {
+            return json(['status' => 200]);
+        }
+        return json(['status' => 500]);
     }
 }
