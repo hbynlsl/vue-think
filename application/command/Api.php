@@ -26,7 +26,7 @@ class Api extends Command
 
     protected function execute(Input $input, Output $output)
     {
-        $name = ucfirst(trim($input->getArgument('name')));
+        $name = trim($input->getArgument('name'));
 
         // 先处理控制器类
         $classname = $this->getClassName($name);
@@ -71,15 +71,15 @@ class Api extends Command
         $classname = 'Create' . ucfirst($name) . 'Table';
         $fileName = Util::mapClassNameToFileName($classname);
         $filePath = $path . DIRECTORY_SEPARATOR . $fileName;
-        file_put_contents($filePath, $this->buildClass($name, $this->getMigrateStub()));
+        file_put_contents($filePath, $this->buildClass(ucfirst($name), $this->getMigrateStub()));
 
         // 写入路由文件
         $routeFile = Env::get('root_path') . DIRECTORY_SEPARATOR . 'route' . DIRECTORY_SEPARATOR . 'route.php';
-        $resourceRoute = "\nRoute::resource('" . strtolower($name) . "s', '" . $module . '/' . ucfirst($name) . (Config::get('controller_suffix') ? ucfirst(Config::get('url_controller_layer')) : '') . "');";
+        $resourceRoute = "\nRoute::resource('" . strtolower($name) . "s', '" . $module . '/' . $name . "');";
         file_put_contents($routeFile, $resourceRoute, FILE_APPEND);
 
     	// 指令输出
-    	$output->writeln($name . ' controller & model & migrate classes have been constructed.');
+        $output->writeln($name . ' controller & model & migrate classes have been constructed.');
     }
 
     protected function buildClass($name, $stub)
@@ -91,7 +91,7 @@ class Api extends Command
         $class = str_replace($namespace . '\\', '', $name);
 
         return str_replace(['{%className%}', '{%actionSuffix%}', '{%namespace%}', '{%app_namespace%}'], [
-            $class,
+            ucfirst($class),
             Config::get('action_suffix'),
             $namespace,
             App::getNamespace(),
@@ -105,7 +105,7 @@ class Api extends Command
         return Env::get('app_path') . ltrim(str_replace('\\', '/', $name), '/') . '.php';
     }
 
-    protected function getResourceName($name) 
+    protected function getResourceName($name)
     {
         if (Config::get('app_multi_module')) {
             if (strpos($name, '/')) {
@@ -114,7 +114,7 @@ class Api extends Command
                 $module = 'common';
             }
             return $module . '/' . ucfirst($name) . (Config::get('controller_suffix') ? ucfirst(Config::get('url_controller_layer')) : '');
-        } 
+        }
         return ucfirst($name);
     }
 
