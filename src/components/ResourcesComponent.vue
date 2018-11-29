@@ -1,20 +1,10 @@
 <template>
     <div>
         <Row :gutter="16" style="margin-top: 16px">
-            <Col span="4" >
+            <ButtonGroup size="large">
                 <Button @click="showdialog"><Icon type="ios-book"></Icon> 添加{{resourcetitle}}</Button>
-            </Col>
-            <!-- <Col span="4" >
-                <Upload :action="'/admins/uploadresources?name=' + resourcename" :show-upload-list="false" :format="['xls','xlsx','csv']" :on-success="uploadsuccess" :on-error="uploaderror" :before-upload="uploadbefore">
-                    <Button icon="ios-cloud-upload-outline">导入{{resourcetitle}}列表</Button>
-                </Upload>
-            </Col> -->
-            <!-- <Col span="4" align="left">
-                <Button type="text" @click="downloadexcel()">下载excel模板</Button>
-            </Col> -->
-            <Col span="4" >
-                <Button  @click="exportData()"><Icon type="ios-download-outline"></Icon> 导出{{resourcetitle}}列表</Button>
-            </Col>
+                <Button @click="exportData()"><Icon type="ios-download-outline"></Icon> 导出{{resourcetitle}}列表</Button>
+            </ButtonGroup>
         </Row>
         <Divider />
         <Table :columns="columns" :data="pageresources" ref="table"></Table>
@@ -183,6 +173,7 @@ export default {
         // 初始化空资源对象
         this.initresource();
         // 修改columns属性
+        // this.resourcefields.reverse();
         let index = 0;
         for (let key in this.resfields) {
             // if (this.resourcefieldtypes[key].indexOf('select') != -1) {
@@ -194,6 +185,7 @@ export default {
                 sortable: true
             });
         }
+        // this.resourcefields.reverse();
         // ajax获取资源列表
         const app = this;
         axios.get('/' + this.resourcename).then(function(response) {

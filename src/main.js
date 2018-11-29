@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import './plugins/axios'
-import App from './App.vue'
+import App from '@/App.vue'
 import './plugins/iview.js'
-import router from './router'
-import store from './store'
+import router from './plugins/router'
+import store from './store/index.js'
 
 Vue.config.productionTip = false
 
